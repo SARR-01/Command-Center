@@ -3,323 +3,387 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#06060c">
+<meta name="theme-color" content="#0b0b14">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Command Center | Elite Edition</title>
+<title>Command Center | Sahil</title>
 <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiQ29tbWFuZCBDZW50ZXIiLCJzaG9ydF9uYW1lIjoiQ29tbWFuZCIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGIwYjE0IiwidGhlbWVfY29sb3IiOiIjMGIwYjE0In0=">
 <style>
 :root{
-  --bg-primary:#040408;
-  --bg-secondary:#0a0a12;
-  --bg-tertiary:#10101e;
-  --bg-card:rgba(14, 14, 28, 0.7);
-  --bg-hover:rgba(139, 92, 246, 0.12);
-  --border:rgba(255, 255, 255, 0.08);
-  --border-glow:rgba(139, 92, 246, 0.35);
-  --text-primary:#f8fafc;
+  --bg-primary:#0b0b14;
+  --bg-secondary:#13131f;
+  --bg-tertiary:#1a1a2e;
+  --bg-card:#1e1e32;
+  --bg-hover:#252545;
+  --border:#2a2a45;
+  --text-primary:#f1f5f9;
   --text-secondary:#94a3b8;
-  --text-muted:#475569;
-  --accent:#a78bfa;
-  --accent-hover:#c084fc;
-  --accent-glow:rgba(167, 139, 250, 0.2);
+  --text-muted:#64748b;
+  --accent:#8b5cf6;
+  --accent-hover:#7c3aed;
+  --accent-glow:rgba(139,92,246,0.15);
   --success:#10b981;
-  --warning:#fbbf24;
-  --danger:#f87171;
+  --warning:#f59e0b;
+  --danger:#ef4444;
   --critical:#f43f5e;
-  --info:#60a5fa;
-  --radius:16px;
-  --radius-sm:10px;
-  --shadow:0 8px 32px 0 rgba(0, 0, 0, 0.5);
-  --shadow-lg:0 20px 60px 0 rgba(0, 0, 0, 0.7);
-  --transition:all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --info:#3b82f6;
+  --radius:12px;
+  --radius-sm:8px;
+  --shadow:0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg:0 12px 48px rgba(0,0,0,0.6);
+  --transition:all 0.2s ease;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',Roboto,sans-serif;background:var(--bg-primary);color:var(--text-primary);overflow:hidden;-webkit-tap-highlight-color:transparent}
-
-/* Cyberpunk Radial Backdrop Lighting */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.06) 0%, transparent 45%),
-              radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.05) 0%, transparent 45%);
-  z-index: -1;
-  pointer-events: none;
-}
-
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg-primary);color:var(--text-primary);overflow:hidden;-webkit-tap-highlight-color:transparent}
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
-::-webkit-scrollbar-thumb:hover{background:var(--text-muted)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
-/* Glassmorphic Login/Registration Cards */
-.login-screen{position:fixed;inset:0;z-index:1000;background:rgba(4, 4, 8, 0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;padding:20px}
-.login-card{position:relative;width:100%;max-width:440px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:40px;box-shadow:var(--shadow-lg);animation:slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)}
-.login-logo{display:flex;align-items:center;gap:14px;margin-bottom:8px;font-size:26px;font-weight:800;letter-spacing:-0.5px}
-.login-logo span{color:var(--accent);text-shadow:0 0 15px var(--accent-glow)}
-.login-subtitle{color:var(--text-secondary);font-size:14px;margin-bottom:28px;line-height:1.6}
-.login-field{margin-bottom:20px}
-.login-field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;color:var(--text-secondary);margin-bottom:8px}
-.login-field input{width:100%;padding:14px 18px;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:14px;outline:none;transition:var(--transition)}
-.login-field input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-glow);background:rgba(0,0,0,0.5)}
+/* Login */
+.login-screen{position:fixed;inset:0;z-index:1000;background:var(--bg-primary);display:flex;align-items:center;justify-content:center;padding:20px}
+.login-bg{position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(139,92,246,0.08),transparent 50%),radial-gradient(circle at 80% 20%,rgba(59,130,246,0.06),transparent 50%)}
+.login-card{position:relative;width:100%;max-width:420px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:36px;box-shadow:var(--shadow-lg);animation:slideUp 0.5s ease}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:8px;font-size:24px;font-weight:800;letter-spacing:-0.5px}
+.login-logo span{color:var(--accent)}
+.login-subtitle{color:var(--text-secondary);font-size:14px;margin-bottom:28px;line-height:1.5}
+.login-field{margin-bottom:18px}
+.login-field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-secondary);margin-bottom:6px}
+.login-field input{width:100%;padding:12px 16px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:14px;outline:none;transition:var(--transition)}
+.login-field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.btn{width:100%;padding:12px 20px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.btn-secondary{background:var(--bg-hover);color:var(--text-primary);border:1px solid var(--border)}
+.btn-secondary:hover{background:var(--border)}
+.btn-sm{padding:8px 14px;font-size:13px;width:auto}
+.btn-danger{background:var(--danger)}
+.btn-danger:hover{background:#dc2626}
+.login-footer{margin-top:20px;text-align:center;font-size:13px;color:var(--text-muted)}
+.login-footer a{color:var(--accent);cursor:pointer;text-decoration:none;font-weight:600}
+.login-footer a:hover{text-decoration:underline}
+.demo-banner{margin-top:16px;padding:12px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius-sm);font-size:13px;color:var(--text-secondary);text-align:center;line-height:1.5}
 
-/* Futuristic Glow Buttons */
-.btn{width:100%;padding:14px 24px;background:linear-gradient(135deg, #8b5cf6, #6366f1);color:#fff;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:700;cursor:pointer;transition:var(--transition);display:inline-flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 15px rgba(99, 102, 241, 0.35)}
-.btn:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(99, 102, 241, 0.5);filter:brightness(1.15)}
-.btn-secondary{background:var(--bg-tertiary);color:var(--text-primary);border:1px solid var(--border);box-shadow:none}
-.btn-secondary:hover{background:var(--border);transform:translateY(-1px)}
-.btn-sm{padding:8px 16px;font-size:13px;width:auto}
-.btn-danger{background:linear-gradient(135deg, #f43f5e, #e11d48);box-shadow:0 4px 12px rgba(244, 63, 94, 0.3)}
-.btn-danger:hover{box-shadow:0 6px 18px rgba(244, 63, 94, 0.45)}
-.login-footer{margin-top:24px;text-align:center;font-size:13px;color:var(--text-secondary)}
-.login-footer a{color:var(--accent);cursor:pointer;text-decoration:none;font-weight:600;transition:var(--transition)}
-.login-footer a:hover{text-decoration:underline;color:var(--accent-hover)}
-.demo-banner{margin-top:20px;padding:14px;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.25);border-radius:var(--radius-sm);font-size:13px;color:var(--text-secondary);text-align:center;line-height:1.6}
-
-/* Elite App Frame Structure Layout */
-.app{display:none;height:100vh;opacity:0;transition:opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1)}
-.app.active{display:flex;opacity:1}
-.sidebar{width:280px;background:var(--bg-secondary);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;transition:var(--transition);z-index:800}
-.sidebar-header{padding:24px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border)}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg, #8b5cf6, #3b82f6);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;box-shadow:0 0 15px var(--accent-glow)}
-.logo-text{font-size:20px;font-weight:800;letter-spacing:-0.5px}
-.nav{flex:1;overflow-y:auto;padding:20px 14px}
-.nav-group{margin-bottom:28px}
-.nav-label{padding:0 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:10px}
-.nav-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition);color:var(--text-secondary);font-size:14px;font-weight:500;margin-bottom:6px;border-left:3px solid transparent}
-.nav-item:hover{background:var(--bg-hover);color:var(--text-primary);transform:translateX(2px)}
-.nav-item.active{background:var(--bg-hover);color:var(--accent);border-left-color:var(--accent);font-weight:600;box-shadow:inset 1px 0 0 rgba(255,255,255,0.02)}
-.nav-item svg{width:18px;height:18px;flex-shrink:0;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;fill:none}
-.sidebar-footer{padding:20px;border-top:1px solid var(--border);background:rgba(0,0,0,0.15)}
-.user-card{display:flex;align-items:center;gap:14px;padding:12px;border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition);border:1px solid transparent}
-.user-card:hover{background:var(--bg-tertiary);border-color:var(--border);transform:translateY(-1px)}
-.user-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg, #8b5cf6, #6366f1);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;flex-shrink:0;box-shadow:0 0 10px rgba(139, 92, 246, 0.2)}
+/* App Layout */
+.app{display:flex;height:100vh;opacity:0;transition:opacity 0.3s}
+.app.active{opacity:1}
+.sidebar{width:260px;background:var(--bg-secondary);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;transition:var(--transition);z-index:800}
+.sidebar-header{padding:20px 24px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.logo-icon{width:32px;height:32px;background:var(--accent);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px}
+.logo-text{font-size:18px;font-weight:800;letter-spacing:-0.5px}
+.nav{flex:1;overflow-y:auto;padding:16px 12px}
+.nav-group{margin-bottom:24px}
+.nav-label{padding:0 12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:8px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition);color:var(--text-secondary);font-size:14px;font-weight:500;margin-bottom:4px;border-left:3px solid transparent}
+.nav-item:hover{background:var(--bg-hover);color:var(--text-primary)}
+.nav-item.active{background:var(--accent-glow);color:var(--accent);border-left-color:var(--accent)}
+.nav-item svg{width:18px;height:18px;flex-shrink:0;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.sidebar-footer{padding:16px;border-top:1px solid var(--border)}
+.user-card{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition)}
+.user-card:hover{background:var(--bg-hover)}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0}
 .user-info{flex:1;min-width:0}
-.user-name{font-size:14px;font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.user-role{font-size:12px;color:var(--text-secondary);margin-top:2px}
+.user-name{font-size:13px;font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.user-role{font-size:12px;color:var(--text-muted)}
 
-/* Main Panel Core Styles */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;background:transparent}
-.header{height:72px;background:rgba(10, 10, 18, 0.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;flex-shrink:0;z-index:700}
-.header-left{display:flex;align-items:center;gap:20px;flex:1}
-.header-title{font-size:20px;font-weight:800;letter-spacing:-0.5px}
-.search-box{position:relative;max-width:440px;width:100%}
-.search-box input{width:100%;padding:12px 16px 12px 42px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:14px;outline:none;transition:var(--transition)}
-.search-box input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);background:var(--bg-tertiary)}
-.search-box svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-secondary);width:18px;height:18px;stroke-width:2.2;fill:none}
-.header-right{display:flex;align-items:center;gap:14px}
-.icon-btn{width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--border);color:var(--text-secondary);cursor:pointer;transition:var(--transition);position:relative}
-.icon-btn:hover{background:var(--bg-hover);color:var(--text-primary);border-color:var(--accent)}
-.icon-btn svg{width:20px;height:20px;stroke-width:2;fill:none}
-.badge{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 6px;background:var(--critical);color:#fff;font-size:11px;font-weight:800;border-radius:10px;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg-secondary);box-shadow:0 2px 8px rgba(244, 63, 94, 0.4)}
-.content{flex:1;overflow-y:auto;padding:32px}
+/* Main */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.header{height:64px;background:var(--bg-secondary);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;flex-shrink:0}
+.header-left{display:flex;align-items:center;gap:16px;flex:1}
+.header-title{font-size:18px;font-weight:800}
+.search-box{position:relative;max-width:400px;width:100%}
+.search-box input{width:100%;padding:10px 14px 10px 38px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;outline:none;transition:var(--transition)}
+.search-box input:focus{border-color:var(--accent)}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);width:16px;height:16px;stroke-width:2;fill:none}
+.header-right{display:flex;align-items:center;gap:12px}
+.icon-btn{width:40px;height:40px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--border);color:var(--text-secondary);cursor:pointer;transition:var(--transition);position:relative}
+.icon-btn:hover{background:var(--bg-hover);color:var(--text-primary)}
+.icon-btn svg{width:18px;height:18px;stroke-width:2;fill:none}
+.badge{position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;padding:0 5px;background:var(--critical);color:#fff;font-size:11px;font-weight:700;border-radius:9px;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg-secondary)}
+.content{flex:1;overflow-y:auto;padding:24px}
 
-/* Advanced Translucent Grid System */
-.grid{display:grid;gap:24px}
+/* Stats */
+.grid{display:grid;gap:20px}
 .grid-4{grid-template-columns:repeat(4,1fr)}
 .grid-3{grid-template-columns:repeat(3,1fr)}
 .grid-2{grid-template-columns:repeat(2,1fr)}
-.stat-card{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:var(--transition);position:relative;overflow:hidden}
-.stat-card:hover{border-color:var(--border-glow);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-.stat-card::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom, var(--accent), #6366f1);opacity:0;transition:var(--transition)}
-.stat-card:hover::after{opacity:1}
-.stat-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.stat-icon{width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;background:var(--bg-hover);color:var(--accent);border:1px solid rgba(139, 92, 246, 0.25)}
-.stat-icon svg{width:22px;height:22px;stroke-width:2;fill:none}
-.stat-value{font-size:36px;font-weight:800;letter-spacing:-1.5px;margin-bottom:6px;background:linear-gradient(to right, #fff, var(--text-secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent}
-.stat-label{font-size:13px;color:var(--text-secondary);font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
-.stat-change{font-size:12px;color:var(--success);margin-top:6px;font-weight:700;display:flex;align-items:center;gap:4px}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:var(--transition)}
+.stat-card:hover{border-color:var(--text-muted);transform:translateY(-2px);box-shadow:var(--shadow)}
+.stat-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.stat-icon{width:40px;height:40px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;background:var(--accent-glow);color:var(--accent)}
+.stat-icon svg{width:20px;height:20px;stroke-width:2;fill:none}
+.stat-value{font-size:32px;font-weight:800;letter-spacing:-1px;margin-bottom:4px}
+.stat-label{font-size:13px;color:var(--text-secondary)}
+.stat-change{font-size:12px;color:var(--success);margin-top:4px;font-weight:600}
 
-/* Unified Layout Architecture Content Panels */
-.section{background:var(--bg-card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:32px;box-shadow:var(--shadow)}
-.section-header{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:14px;background:rgba(255,255,255,0.01)}
-.section-title{font-size:16px;font-weight:700;display:flex;align-items:center;gap:12px}
-.section-title svg{width:20px;height:20px;stroke-width:2;color:var(--accent);fill:none}
+/* Sections */
+.section{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px}
+.section-header{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.section-title{font-size:16px;font-weight:700;display:flex;align-items:center;gap:10px}
+.section-title svg{width:18px;height:18px;stroke-width:2;fill:none}
+.section-body{padding:0}
 
-/* Tables and Interactive Lists Styling */
+/* Tables */
 .table-container{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th{text-align:left;padding:14px 20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-secondary);border-bottom:1px solid var(--border);background:rgba(0,0,0,0.2)}
-td{padding:16px 20px;border-bottom:1px solid var(--border);color:var(--text-primary);vertical-align:middle}
-tr:hover td{background:rgba(139, 92, 246, 0.03)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:12px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);border-bottom:1px solid var(--border);white-space:nowrap;cursor:pointer}
+th:hover{color:var(--text-primary)}
+td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--text-primary);vertical-align:middle}
+tr:hover td{background:rgba(255,255,255,0.02)}
 tr:last-child td{border-bottom:none}
-.cell-title{font-weight:600;color:var(--text-primary);font-size:14px}
-.cell-meta{font-size:12px;color:var(--text-secondary);margin-top:4px}
-.row-actions{display:flex;gap:8px;opacity:0;transition:var(--transition)}
+.cell-title{font-weight:600;color:var(--text-primary);line-height:1.4}
+.cell-meta{font-size:12px;color:var(--text-secondary);margin-top:3px}
+.row-actions{display:flex;gap:6px;opacity:0;transition:var(--transition)}
 tr:hover .row-actions{opacity:1}
-.row-actions button{padding:8px;border-radius:6px;background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--transition)}
-.row-actions button:hover{border-color:var(--accent);color:var(--text-primary);background:var(--bg-hover)}
+.row-actions button{padding:6px;border-radius:6px;background:transparent;border:none;color:var(--text-muted);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center}
+.row-actions button:hover{background:var(--bg-hover);color:var(--text-primary)}
+.row-actions button svg{width:14px;height:14px;stroke-width:2;fill:none}
 
-/* Badges Systems */
-.badge-pill{display:inline-flex;align-items:center;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
-.bg-done{background:rgba(16,185,129,0.12);color:var(--success);border:1px solid rgba(16,185,129,0.2)}
-.bg-progress{background:rgba(245,158,11,0.12);color:var(--warning);border:1px solid rgba(245,158,11,0.2)}
-.bg-todo{background:rgba(71,85,105,0.2);color:var(--text-secondary);border:1px solid var(--border)}
-.bg-critical{background:rgba(244,63,94,0.12);color:var(--critical);border:1px solid rgba(244,63,94,0.2)}
+/* Badges */
+.badge-pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap}
+.bg-done{background:rgba(16,185,129,0.15);color:var(--success)}
+.bg-progress{background:rgba(245,158,11,0.15);color:var(--warning)}
+.bg-todo{background:rgba(100,116,139,0.15);color:var(--text-muted)}
+.bg-critical{background:rgba(244,63,94,0.15);color:var(--critical)}
+.bg-high{background:rgba(245,158,11,0.2);color:var(--warning)}
+.bg-medium{background:rgba(59,130,246,0.15);color:var(--info)}
+.bg-low{background:rgba(100,116,139,0.2);color:var(--text-muted)}
+.bg-issue{background:rgba(16,185,129,0.15);color:var(--success)}
+.bg-validation{background:rgba(139,92,246,0.15);color:var(--accent)}
+.bg-task{background:rgba(236,72,153,0.15);color:#ec4899}
+.bg-test{background:rgba(6,182,212,0.15);color:#06b6d4}
+.bg-change{background:rgba(249,115,22,0.15);color:#f97316}
+.bg-meeting{background:rgba(99,102,241,0.15);color:#6366f1}
 
-/* Bookmarks Matrix View */
-.bookmark-list{display:flex;flex-direction:column;gap:12px;padding:24px}
-.bookmark-item{display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(0,0,0,0.15);border:1px solid var(--border);border-radius:var(--radius-sm);transition:var(--transition);cursor:pointer}
-.bookmark-item:hover{border-color:var(--border-glow);background:var(--bg-hover);transform:translateX(4px);box-shadow:var(--shadow)}
-.bookmark-fav{width:44px;height:44px;border-radius:var(--radius-sm);background:var(--bg-secondary);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.bookmark-tags{display:flex;gap:8px;margin-left:auto}
-.tag-pill{padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;background:var(--bg-tertiary);color:var(--text-secondary);border:1px solid var(--border)}
+/* Bookmarks */
+.bookmark-list{display:flex;flex-direction:column;gap:8px;padding:16px}
+.bookmark-item{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius-sm);transition:var(--transition);cursor:pointer}
+.bookmark-item:hover{border-color:var(--text-muted);background:var(--bg-hover);transform:translateX(4px)}
+.bookmark-fav{width:40px;height:40px;border-radius:var(--radius-sm);background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.bookmark-info{flex:1;min-width:0}
+.bookmark-title{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bookmark-url{font-size:12px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.bookmark-tags{display:flex;gap:6px;flex-shrink:0;margin-left:auto;padding-left:16px}
+.tag-pill{padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;background:var(--bg-secondary);color:var(--text-secondary);border:1px solid var(--border)}
+.bookmark-actions{display:flex;gap:4px;flex-shrink:0;margin-left:8px;opacity:0;transition:var(--transition)}
+.bookmark-item:hover .bookmark-actions{opacity:1}
+.bookmark-actions button{width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--text-muted);cursor:pointer;border-radius:6px}
+.bookmark-actions button:hover{background:var(--bg-card);color:var(--text-primary)}
+.bookmark-actions button svg{width:16px;height:16px;stroke-width:2;fill:none}
 
-/* Secure Data Vault Layout */
-.vault-score{display:flex;align-items:center;gap:32px;margin:24px;padding:28px;background:linear-gradient(135deg, rgba(139,92,246,0.05), rgba(99,102,241,0.05));border:1px solid var(--border);border-radius:var(--radius)}
-.score-ring{position:relative;width:84px;height:84px;flex-shrink:0}
-.score-ring svg{transform:rotate(-90deg);width:84px;height:84px}
+/* Vault */
+.vault-score{display:flex;align-items:center;gap:24px;margin:20px;padding:24px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius);flex-wrap:wrap}
+.score-ring{position:relative;width:80px;height:80px;flex-shrink:0}
+.score-ring svg{transform:rotate(-90deg);width:80px;height:80px}
 .score-ring circle{fill:none;stroke-width:8}
 .score-ring .bg{stroke:var(--border)}
-.score-ring .fill{stroke:var(--accent);stroke-linecap:round;stroke-dasharray:226;stroke-dashoffset:45}
-.score-value{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;text-shadow:0 0 10px var(--accent-glow)}
-.vault-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;padding:0 24px 24px}
-.vault-card{background:rgba(0,0,0,0.15);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:var(--transition)}
-.vault-card:hover{border-color:var(--border-glow);box-shadow:var(--shadow-lg)}
-.vault-field{margin-bottom:14px}
-.vault-field-value{font-family:'SF Mono', Menlo, monospace;font-size:13px;background:rgba(0,0,0,0.3);padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px}
-.masked{filter:blur(6px);user-select:none;transition:filter 0.2s cubic-bezier(0.4, 0, 0.2, 1)}
-.masked.unmasked{filter:blur(0)}
+.score-ring .fill{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset 0.6s ease;stroke-dasharray:226;stroke-dashoffset:45}
+.score-value{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800}
+.score-info{flex:1;min-width:200px}
+.score-title{font-size:16px;font-weight:700;margin-bottom:4px}
+.score-desc{font-size:13px;color:var(--text-secondary);line-height:1.5}
+.vault-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;padding:0 20px 20px}
+.vault-card{background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:var(--transition);position:relative}
+.vault-card:hover{border-color:var(--text-muted)}
+.vault-card-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.vault-card-fav{width:44px;height:44px;border-radius:var(--radius-sm);background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;font-size:22px}
+.vault-card-title{font-weight:700;font-size:15px}
+.vault-card-meta{font-size:12px;color:var(--text-muted);margin-top:2px}
+.vault-field{margin-bottom:12px}
+.vault-field-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:4px}
+.vault-field-value{font-family:'SF Mono',monospace,monospace;font-size:13px;background:var(--bg-secondary);padding:10px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;word-break:break-all}
+.vault-field-value button{background:transparent;border:none;color:var(--text-muted);cursor:pointer;padding:4px;display:flex;align-items:center;justify-content:center;border-radius:4px}
+.vault-field-value button:hover{background:var(--bg-hover);color:var(--accent)}
+.vault-field-value button svg{width:16px;height:16px;stroke-width:2;fill:none}
+.masked{filter:blur(5px);user-select:none;transition:filter 0.2s}
 
-/* Kanban Core Architecture Grid Modules */
-.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:24px;overflow-x:auto}
-.kanban-col{display:flex;flex-direction:column;min-width:290px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);max-height:calc(100vh - 240px);box-shadow:var(--shadow)}
-.kanban-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:14px;background:rgba(255,255,255,0.01)}
-.kanban-count{font-size:11px;color:var(--text-secondary);background:var(--bg-tertiary);padding:3px 12px;border-radius:12px;font-weight:700;border:1px solid var(--border)}
-.kanban-body{padding:14px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:12px}
-.kanban-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;cursor:grab;transition:var(--transition)}
-.kanban-card:hover{border-color:var(--text-secondary);box-shadow:var(--shadow);transform:translateY(-1px)}
+/* Contacts */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;padding:20px}
+.contact-card{background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:var(--transition);cursor:pointer}
+.contact-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--shadow)}
+.contact-avatar{width:52px;height:52px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;margin-bottom:14px}
+.contact-name{font-weight:700;font-size:16px;margin-bottom:3px}
+.contact-role{font-size:13px;color:var(--text-secondary);margin-bottom:14px}
+.contact-detail{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-muted);margin-bottom:8px}
+.contact-detail svg{width:14px;height:14px;flex-shrink:0;stroke-width:2;fill:none}
+.contact-tags{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.contact-footer{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted);display:flex;align-items:center;justify-content:space-between}
 
-/* Global Modern Overlay Windows Modals */
-.modal-overlay{position:fixed;inset:0;background:rgba(4, 4, 8, 0.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:900;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity 0.25s ease}
+/* Kanban */
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:20px;overflow-x:auto}
+.kanban-col{display:flex;flex-direction:column;min-width:280px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);max-height:calc(100vh - 240px)}
+.kanban-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:13px}
+.kanban-count{font-size:11px;color:var(--text-muted);background:var(--bg-tertiary);padding:2px 10px;border-radius:10px}
+.kanban-body{padding:12px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:10px}
+.kanban-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;cursor:grab;transition:var(--transition)}
+.kanban-card:hover{border-color:var(--text-muted);box-shadow:var(--shadow)}
+.kanban-card:active{cursor:grabbing;transform:scale(0.98)}
+.kanban-card-title{font-weight:600;font-size:13px;margin-bottom:10px;line-height:1.4}
+.kanban-card-meta{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-muted);margin-bottom:10px}
+.kanban-card-tags{display:flex;gap:6px;flex-wrap:wrap}
+
+/* Activity */
+.activity-list{display:flex;flex-direction:column;gap:16px;padding:20px}
+.activity-item{display:flex;gap:14px;position:relative;padding-left:30px}
+.activity-item::before{content:'';position:absolute;left:9px;top:32px;bottom:-20px;width:2px;background:var(--border)}
+.activity-item:last-child::before{display:none}
+.activity-dot{position:absolute;left:0;top:6px;width:20px;height:20px;border-radius:50%;background:var(--bg-tertiary);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1}
+.activity-dot svg{width:10px;height:10px;stroke-width:3;fill:none}
+.activity-content{flex:1;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px}
+.activity-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap;gap:8px}
+.activity-action{font-weight:600;font-size:13px}
+.activity-time{font-size:11px;color:var(--text-muted)}
+.activity-detail{font-size:13px;color:var(--text-secondary);margin-top:4px;line-height:1.5}
+
+/* Modals */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:900;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity 0.2s}
 .modal-overlay.active{opacity:1;pointer-events:auto}
-.modal{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:560px;max-height:85vh;overflow-y:auto;box-shadow:var(--shadow-lg);transform:scale(0.96);transition:transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)}
+.modal{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);transform:scale(0.95);transition:transform 0.2s}
 .modal-overlay.active .modal{transform:scale(1)}
-.modal-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.01)}
-.modal-close{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--border);color:var(--text-secondary);cursor:pointer;transition:var(--transition)}
-.modal-close:hover{background:var(--bg-hover);color:var(--text-primary);border-color:var(--accent)}
+.modal-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-size:18px;font-weight:800}
+.modal-close{width:32px;height:32px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--text-muted);cursor:pointer;font-size:22px;line-height:1}
+.modal-close:hover{background:var(--bg-hover);color:var(--text-primary)}
 .modal-body{padding:24px}
-.form-group{margin-bottom:22px}
-.form-group label{display:block;font-size:11px;font-weight:700;margin-bottom:8px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 16px;background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:14px;outline:none;transition:var(--transition);font-family:inherit}
-.form-group textarea{resize:vertical;min-height:95px}
+.modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:12px;font-weight:700;margin-bottom:8px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.3px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:14px;outline:none;transition:var(--transition);font-family:inherit}
+.form-group textarea{resize:vertical;min-height:90px;line-height:1.5}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-hint{font-size:12px;color:var(--text-muted);margin-top:6px;line-height:1.4}
 
-/* Toast Notifications Container Elements */
-.toast-container{position:fixed;top:24px;right:24px;z-index:1100;display:flex;flex-direction:column;gap:12px;pointer-events:none}
-.toast{background:var(--bg-card);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow-lg);animation:slideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1);min-width:320px;max-width:400px;pointer-events:auto}
-.toast-success{border-left:4px solid var(--success)}
-.toast-error{border-left:4px solid var(--danger)}
-.toast-info{border-left:4px solid var(--info)}
-
-/* Command Palette Overlay */
-.palette-overlay{position:fixed;inset:0;background:rgba(4, 4, 8, 0.7);backdrop-filter:blur(8px);z-index:950;display:flex;align-items:flex-start;justify-content:center;padding-top:12vh;opacity:0;pointer-events:none;transition:opacity 0.2s ease}
+/* Command Palette */
+.palette-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);z-index:950;display:flex;align-items:flex-start;justify-content:center;padding-top:15vh;opacity:0;pointer-events:none;transition:opacity 0.15s}
 .palette-overlay.active{opacity:1;pointer-events:auto}
-.palette{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:640px;box-shadow:var(--shadow-lg);overflow:hidden}
-.palette-input{width:100%;padding:20px 24px;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text-primary);font-size:16px;outline:none}
+.palette{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:600px;box-shadow:var(--shadow-lg);overflow:hidden}
+.palette-input{width:100%;padding:18px 20px;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text-primary);font-size:16px;outline:none}
+.palette-input::placeholder{color:var(--text-muted)}
+.palette-results{max-height:400px;overflow-y:auto;padding:8px}
+.palette-item{display:flex;align-items:center;gap:14px;padding:12px;border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition);color:var(--text-secondary);font-size:14px}
+.palette-item:hover{background:var(--bg-hover);color:var(--text-primary)}
+.palette-item svg{width:18px;height:18px;flex-shrink:0;stroke-width:2;fill:none}
+.palette-empty{padding:32px;text-align:center;color:var(--text-muted);font-size:14px}
 
-/* Action FAB Menus Interface */
-.fab{position:fixed;bottom:32px;right:32px;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg, #8b5cf6, #6366f1);color:#fff;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(139, 92, 246, 0.4);display:flex;align-items:center;justify-content:center;font-size:28px;transition:var(--transition);z-index:850}
-.fab:hover{transform:scale(1.1) rotate(90deg);box-shadow:0 8px 25px rgba(139, 92, 246, 0.55)}
-.fab-menu{position:fixed;bottom:104px;right:32px;display:flex;flex-direction:column;gap:12px;z-index:850;opacity:0;pointer-events:none;transform:translateY(20px);transition:all 0.25s cubic-bezier(0.16, 1, 0.3, 1)}
-.fab-menu.active{opacity:1;pointer-events:auto;transform:translateY(0)}
-.fab-item{display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--bg-card);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);transition:var(--transition)}
-.fab-item:hover{background:var(--bg-hover);border-color:var(--accent);transform:translateX(-4px)}
-.fab-item svg{width:16px;height:16px;stroke-width:2.2;fill:none}
+/* Toast */
+.toast-container{position:fixed;top:20px;right:20px;z-index:1000;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.toast{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow-lg);animation:slideInRight 0.3s ease;min-width:300px;max-width:380px;pointer-events:auto}
+.toast-success{border-left:3px solid var(--success)}
+.toast-error{border-left:3px solid var(--danger)}
+.toast-info{border-left:3px solid var(--info)}
+.toast-message{font-size:13px;font-weight:500;line-height:1.4}
 
-.view-toggle{display:flex;gap:4px;background:rgba(0,0,0,0.2);padding:4px;border-radius:var(--radius-sm);border:1px solid var(--border)}
-.view-toggle button{padding:6px 14px;border:none;background:transparent;color:var(--text-secondary);cursor:pointer;border-radius:6px;font-size:12px;font-weight:700;transition:var(--transition)}
+/* Empty State */
+.empty{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.empty-icon{font-size:56px;margin-bottom:16px;opacity:0.4}
+.empty-title{font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:8px}
+.empty-desc{font-size:14px;max-width:300px;margin:0 auto;line-height:1.5}
+
+/* View Toggle */
+.view-toggle{display:flex;gap:4px;background:var(--bg-tertiary);padding:4px;border-radius:var(--radius-sm);border:1px solid var(--border)}
+.view-toggle button{padding:7px 14px;border:none;background:transparent;color:var(--text-muted);cursor:pointer;border-radius:6px;font-size:12px;font-weight:700;transition:var(--transition)}
 .view-toggle button.active{background:var(--accent);color:#fff}
 
-.filter-bar{display:flex;gap:14px;padding:16px 24px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.05)}
-.filter-bar input, .filter-bar select{padding:10px 14px;background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;outline:none}
+/* Filter Bar */
+.filter-bar{display:flex;gap:12px;padding:16px 20px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border)}
+.filter-bar input,.filter-bar select{padding:9px 12px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;outline:none;min-width:140px}
+.filter-bar input:focus,.filter-bar select:focus{border-color:var(--accent)}
 
-.empty{text-align:center;padding:80px 24px;color:var(--text-secondary)}
-.empty-icon{font-size:64px;margin-bottom:16px;opacity:0.3}
+/* Quick Add FAB */
+.fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;box-shadow:var(--shadow-lg);display:flex;align-items:center;justify-content:center;font-size:28px;transition:var(--transition);z-index:100;font-weight:300}
+.fab:hover{background:var(--accent-hover);transform:scale(1.08) rotate(90deg)}
+.fab-menu{position:fixed;bottom:88px;right:24px;display:flex;flex-direction:column;gap:10px;z-index:100;opacity:0;pointer-events:none;transform:translateY(15px);transition:all 0.25s cubic-bezier(0.4,0,0.2,1)}
+.fab-menu.active{opacity:1;pointer-events:auto;transform:translateY(0)}
+.fab-item{display:flex;align-items:center;gap:12px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);white-space:nowrap;transition:var(--transition)}
+.fab-item:hover{background:var(--bg-hover);border-color:var(--accent);transform:translateX(-4px)}
+.fab-item svg{width:16px;height:16px;stroke-width:2;fill:none}
 
-@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes slideInRight{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:translateX(0)}}
+/* Animations */
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fade-in{animation:fadeIn 0.4s ease}
 
-@media(max-width:1024px){.grid-4{grid-template-columns:repeat(2,1fr)}.kanban{grid-template-columns:repeat(2,1fr)}}
+/* Mobile */
+@media(max-width:1024px){
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .kanban{grid-template-columns:repeat(2,1fr)}
+}
 @media(max-width:768px){
-  .sidebar{position:fixed;left:-280px;top:0;bottom:0;box-shadow:var(--shadow-lg)}.sidebar.open{left:0}
-  .grid-4,.grid-3,.grid-2,.kanban,.vault-grid{grid-template-columns:1fr}
-  .header{padding:0 20px}.content{padding:20px}.search-box{display:none}
+  .sidebar{position:fixed;left:-260px;top:0;bottom:0}
+  .sidebar.open{left:0}
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:700;opacity:0;pointer-events:none;transition:opacity 0.2s}
+  .overlay.active{opacity:1;pointer-events:auto}
+  .grid-4,.grid-3,.grid-2{grid-template-columns:1fr}
+  .kanban{grid-template-columns:1fr}
+  .vault-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .header{padding:0 16px}
+  .content{padding:16px}
+  .search-box{display:none}
+  .vault-score{margin:12px;padding:16px}
 }
 </style>
 </head>
 <body>
 
 <div class="login-screen" id="loginScreen">
+  <div class="login-bg"></div>
   <div class="login-card">
-    <div class="login-logo"><div class="logo-icon">CC</div><div>Command<span>Center</span></div></div>
-    <div class="login-subtitle">Secure static workspace framework deployment engine.</div>
-    <form id="loginForm" onsubmit="event.preventDefault(); Auth.login();">
-      <div class="login-field"><label>Email Address</label><input type="email" id="loginEmail" value="sahil@command.center" required></div>
-      <div class="login-field"><label>Password</label><input type="password" id="loginPassword" value="admin123" required></div>
-      <button type="submit" class="btn" style="margin-bottom:12px">Sign In</button>
-      <button type="button" class="btn btn-secondary" onclick="Auth.demo()">Use Demo Workspace</button>
+    <div class="login-logo"><div class="logo-icon">CC</div><div>Command<span style="color:var(--accent)">Center</span></div></div>
+    <div class="login-subtitle">Your unified workspace for tasks, bookmarks, credentials, and contacts.</div>
+    <form id="loginForm" onsubmit="return false;">
+      <div class="login-field"><label>Email Address</label><input type="email" id="loginEmail" value="sahil@command.center"></div>
+      <div class="login-field"><label>Password</label><input type="password" id="loginPassword" value="admin123"></div>
+      <button class="btn" onclick="Auth.login()" style="margin-bottom:10px">Sign In</button>
+      <button class="btn btn-secondary" onclick="Auth.demo()">Use Demo Account</button>
     </form>
-    <div class="demo-banner"><strong>Static Storage Architecture Enabled:</strong> Accounts persist locally.</div>
-    <div class="login-footer">Need a custom environment? <a onclick="Auth.showRegister()">Create local account</a></div>
+    <div class="demo-banner"><strong>Demo Mode:</strong> Pre-loaded with your project data from the screenshots.</div>
+    <div class="login-footer">Don't have an account? <a onclick="Auth.showRegister()">Create one</a></div>
   </div>
 </div>
 
 <div class="login-screen" id="registerScreen" style="display:none">
+  <div class="login-bg"></div>
   <div class="login-card">
-    <div class="login-logo"><div class="logo-icon">CC</div><div>Command<span>Center</span></div></div>
-    <div class="login-subtitle">Initialize an isolated local account structure wrapper.</div>
-    <form id="registerForm" onsubmit="event.preventDefault(); Auth.register();">
-      <div class="login-field"><label>Full Name</label><input type="text" id="regName" placeholder="Sahil Kumar" required></div>
-      <div class="login-field"><label>Email Address</label><input type="email" id="regEmail" placeholder="you@domain.com" required></div>
-      <div class="login-field"><label>Password</label><input type="password" id="regPassword" placeholder="Minimum 6 characters" required></div>
-      <button type="submit" class="btn" style="margin-bottom:12px">Register Engine</button>
-      <button type="button" class="btn btn-secondary" onclick="Auth.showLogin()">Return to Sign In</button>
+    <div class="login-logo"><div class="logo-icon">CC</div><div>Command<span style="color:var(--accent)">Center</span></div></div>
+    <div class="login-subtitle">Create your personal command center.</div>
+    <form onsubmit="return false;">
+      <div class="login-field"><label>Full Name</label><input type="text" id="regName" placeholder="Sahil Kumar"></div>
+      <div class="login-field"><label>Email Address</label><input type="email" id="regEmail" placeholder="you@company.com"></div>
+      <div class="login-field"><label>Password</label><input type="password" id="regPassword" placeholder="Min 6 characters"></div>
+      <button class="btn" onclick="Auth.register()" style="margin-bottom:10px">Create Account</button> <button class="btn btn-secondary" onclick="Auth.showLogin()">Back to Sign In</button>
     </form>
   </div>
 </div>
 
-<div class="toast-container" id="toastContainer"></div>
+<div class="overlay" id="mobileOverlay" onclick="UI.toggleSidebar()"></div>
 
 <div class="app" id="app">
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="logo-icon">CC</div>
-      <div class="logo-text">Command<span style="color:var(--accent)">Center</span></div>
-    </div>
+    <div class="sidebar-header"><div class="logo-icon">CC</div><div class="logo-text">Command<span style="color:var(--accent)">Center</span></div></div>
     <nav class="nav">
       <div class="nav-group">
-        <div class="nav-label">Workspace Matrix</div>
-        <div class="nav-item active" data-view="dashboard" onclick="Router.go('dashboard')">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          Operational View
-        </div>
-        <div class="nav-item" data-view="tasks" onclick="Router.go('tasks')">
-          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-          Task Matrix (Kanban)
-        </div>
-        <div class="nav-item" data-view="bookmarks" onclick="Router.go('bookmarks')">
-          <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
-          Resource Directories
-        </div>
-        <div class="nav-item" data-view="vault" onclick="Router.go('vault')">
-          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-          Encrypted Data Vault
-        </div>
-        <div class="nav-item" data-view="contacts" onclick="Router.go('contacts')">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          Nodes & Contacts
-        </div>
+        <div class="nav-label">Workspace</div>
+        <div class="nav-item active" data-view="dashboard" onclick="Router.go('dashboard')"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Dashboard</span></div>
+        <div class="nav-item" data-view="tasks" onclick="Router.go('tasks')"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span>Task Manager</span></div>
+        <div class="nav-item" data-view="bookmarks" onclick="Router.go('bookmarks')"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>Bookmarks</span></div>
+        <div class="nav-item" data-view="vault" onclick="Router.go('vault')"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Secure Vault</span></div>
+        <div class="nav-item" data-view="contacts" onclick="Router.go('contacts')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Contacts</span></div>
+      </div>
+      <div class="nav-group">
+        <div class="nav-label">System</div>
+        <div class="nav-item" onclick="UI.showPalette()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>Command Palette</span><span style="margin-left:auto;font-size:10px;background:var(--border);padding:2px 6px;border-radius:4px;color:var(--text-muted)">⌘K</span></div>
+        <div class="nav-item" onclick="UI.showNotifications()"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span>Notifications</span><div class="badge" id="notifBadge">3</div></div>
       </div>
     </nav>
     <div class="sidebar-footer">
       <div class="user-card" onclick="Auth.logout()">
-        <div class="user-avatar" id="sidebarAvatar">U</div>
+        <div class="user-avatar" id="userAvatar">S</div>
         <div class="user-info">
-          <div class="user-name" id="sidebarName">Active Profile</div>
-          <div class="user-role">Sign Out Session</div>
+          <div class="user-name" id="userName">Sahil Kumar</div>
+          <div class="user-role">Workspace Owner</div>
         </div>
+        <svg style="width:16px;height:16px;color:var(--text-muted)" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       </div>
     </div>
   </aside>
@@ -327,150 +391,95 @@ tr:hover .row-actions{opacity:1}
   <main class="main">
     <header class="header">
       <div class="header-left">
-        <h2 class="header-title" id="viewTitle">Operational View</h2>
-        <div class="search-box">
-          <input type="text" id="globalSearchInput" placeholder="Execute quick palette query search..." onkeydown="if(e.key==='Enter')UI.handleGlobalSearch(this.value)">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </div>
+        <button class="icon-btn" id="menuBtn" onclick="UI.toggleSidebar()" style="display:none"><svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <h1 class="header-title" id="viewTitle">Dashboard</h1>
+        <div class="search-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Global search shortcut..." onkeydown="if(e.key==='Enter')UI.handleGlobalSearch(this.value)"></div>
       </div>
       <div class="header-right">
-        <button class="icon-btn" onclick="UI.showPalette()">
-          <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-        </button>
+        <button class="icon-btn" onclick="UI.showPalette()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        <button class="icon-btn" onclick="UI.showNotifications()"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></header-right>
       </div>
     </header>
-    <div class="content" id="viewContainer"></div>
+    <div class="content fade-in" id="viewContent"></div>
   </main>
 </div>
 
-<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)UI.hideModal();">
-  <div class="modal">
-    <div class="modal-header">
-      <h3 class="modal-title" id="modalTitle">Configuration Panel</h3>
-      <button class="modal-close" onclick="UI.hideModal()">&times;</button>
-    </div>
-    <div class="modal-body" id="modalBody"></div>
-  </div>
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)UI.hideModal()">
+  <div class="modal" id="modal"></div>
 </div>
 
-<div class="palette-overlay" id="paletteOverlay" onclick="if(event.target===this)this.classList.remove('active');">
+<div class="palette-overlay" id="paletteOverlay" onclick="if(event.target===this)this.classList.remove('active')">
   <div class="palette">
-    <input type="text" class="palette-input" id="paletteInput" placeholder="Type structural system route action keyword..." oninput="UI.handlePaletteSearch(this.value)">
+    <input type="text" class="palette-input" id="paletteInput" placeholder="Type a command or search..." oninput="UI.handlePaletteSearch(this.value)">
     <div class="palette-results" id="paletteResults"></div>
   </div>
 </div>
 
-<button class="fab" id="fabBtn" onclick="UI.toggleFab()">+</button>
+<button class="fab" onclick="UI.toggleFab()">+</button>
 <div class="fab-menu" id="fabMenu">
-  <div class="fab-item" onclick="UI.openWizard('task')">Create Task Node</div>
-  <div class="fab-item" onclick="UI.openWizard('bookmark')">Map Dynamic Resource</div>
-  <div class="fab-item" onclick="UI.openWizard('vault')">Store Safe Credentials</div>
-  <div class="fab-item" onclick="UI.openWizard('contact')">Index Contact Node</div>
+  <div class="fab-item" onclick="UI.showAddModal('task')"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Add New Task</div>
+  <div class="fab-item" onclick="UI.showAddModal('bookmark')"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>Add Bookmark</div>
+  <div class="fab-item" onclick="UI.showAddModal('vault')"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Save Credential</div>
+  <div class="fab-item" onclick="UI.showAddModal('contact')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Add Contact</div>
 </div>
 
+<div class="toast-container" id="toastContainer"></div>
+
 <script>
-// Mock Repository Memory State Model Variables
-let State = {
+// ==================== RUNTIME DATA STORES ====================
+let state = {
   tasks: [
-    { id:1, title:"Refactor structural authentication layers", priority:"critical", status:"progress", date:"2026-05-24" },
-    { id:2, title:"Audit UI style implementation guides", priority:"high", status:"todo", date:"2026-05-25" },
-    { id:3, title:"Connect localStorage identity endpoints", priority:"medium", status:"done", date:"2026-05-22" }
+    { id: 1, title: 'Refactor Auth middleware pipelines', category: 'validation', priority: 'high', status: 'progress', due: '2026-05-28' },
+    { id: 2, title: 'Implement WebSocket notifications cluster', category: 'task', priority: 'critical', status: 'todo', due: '2026-06-01' },
+    { id: 3, title: 'Audit database index layouts', category: 'test', priority: 'medium', status: 'done', due: '2026-05-20' },
+    { id: 4, title: 'Map engineering synchronicity guidelines', category: 'meeting', priority: 'low', status: 'todo', due: '2026-06-05' }
   ],
   bookmarks: [
-    { id:1, title:"GitHub Pages Documentation", url:"https://pages.github.com", category:"Deployment", icon:"🌐" },
-    { id:2, title:"MDN Web API Client Repositories", url:"https://developer.mozilla.org", category:"Resources", icon:"📚" }
+    { id: 1, title: 'Tailwind Labs Configuration Matrix', url: 'https://tailwindcss.com/docs', fav: '🎨', tags: ['Frontend', 'UI'] },
+    { id: 2, title: 'MDN Web Storage Reference Specs', url: 'https://developer.mozilla.org', fav: '📚', tags: ['Docs', 'JS'] },
+    { id: 3, title: 'V8 Compiler Engine Performance Optimizations', url: 'https://v8.dev/blog', fav: '⚡', tags: ['Backend', 'V8'] }
   ],
   vault: [
-    { id:1, title:"Production Root Server Node Access", target:"ssh sahil@core.center", secure:"••••••••••••••••", secret:"AdminClusterToken2026!" }
+    { id: 1, name: 'Production Database Node Server', type: 'PostgreSQL Cluster', user: 'db_admin_sahil', pass: 'kX9#mP2$vL1!zQ', url: '10.0.4.12:5432' },
+    { id: 2, name: 'AWS Root IAM Administrative Control', type: 'Infrastructure Cloud', user: 'sahil@infrastructure', pass: 'aG7&tY3*mN8@wP', url: 'aws.amazon.com/console' },
+    { id: 3, name: 'Stripe Merchant Gateway Webhook Key', type: 'API Secure Token', user: 'sk_live_51Nx...', pass: 'secret_key_string_hash', url: 'dashboard.stripe.com' }
   ],
   contacts: [
-    { id:1, name:"Sahil Kumar", role:"Principal Interface Systems Architect", email:"sahil@command.center", phone:"+91 99999 88888", icon:"SK" }
-  ]
+    { id: 1, name: 'Aarav Mehta', role: 'Principal Devops Architect', email: 'aarav@cloud.sys', phone: '+91 98765 43210', tags: ['Infrastructure', 'Core'] },
+    { id: 2, name: 'Ananya Sharma', role: 'Lead Interface Designer', email: 'ananya@ui.studio', phone: '+91 87654 32109', tags: ['Design', 'Contractor'] },
+    { id: 3, name: 'Kabir Verma', role: 'Database Engineering Advisor', email: 'kabir@data.layer', phone: '+91 76543 21098', tags: ['Consultant', 'Backend'] }
+  ],
+  filters: {
+    tasks: { search: '', status: 'all', sort: 'id' },
+    bookmarks: { search: '', sort: 'id' },
+    vault: { search: '', sort: 'id' },
+    contacts: { search: '', sort: 'id' }
+  },
+  taskViewMode: 'table'
 };
 
-// Local Repositories Storage Layer Configuration Initializer
-function saveSystemState() { localStorage.setItem('cc_engine_state', JSON.stringify(State)); }
-function loadSystemState() {
-  const cache = localStorage.getItem('cc_engine_state');
-  if(cache) { State = JSON.parse(cache); } else { saveSystemState(); }
-}
-
-// ==================== AUTH CONTROLLER MODULE (CLIENT STORAGE OVERRIDE) ====================
+// ==================== AUTH CONTROLLER ====================
 const Auth = {
-  init() {
-    if (!localStorage.getItem('cc_users')) {
-      const systemRoot = [{ name: "Sahil Kumar", email: "sahil@command.center", password: "admin123" }];
-      localStorage.setItem('cc_users', JSON.stringify(systemRoot));
-    }
-    loadSystemState();
-  },
   check() {
-    this.init();
-    const currentSession = localStorage.getItem('cc_active_session');
-    const appEl = document.getElementById('app');
-    const loginEl = document.getElementById('loginScreen');
-    const registerEl = document.getElementById('registerScreen');
-
-    if (currentSession) {
-      const user = JSON.parse(currentSession);
-      if(loginEl) loginEl.style.display = 'none';
-      if(registerEl) registerEl.style.display = 'none';
-      
-      appEl.style.display = 'flex';
-      setTimeout(() => appEl.classList.add('active'), 50);
-
-      document.getElementById('sidebarName').innerText = user.name;
-      document.getElementById('sidebarAvatar').innerText = user.name.charAt(0).toUpperCase();
-      
-      Router.init();
-    } else {
-      appEl.style.display = 'none';
-      appEl.classList.remove('active');
-      this.showLogin();
+    if (localStorage.getItem('cc_logged_in') === 'true') {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('app').classList.add('active');
+      Router.go('dashboard');
     }
   },
   login() {
-    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-    const pass = document.getElementById('loginPassword').value;
-    const users = JSON.parse(localStorage.getItem('cc_users') || "[]");
-
-    const match = users.find(u => u.email.toLowerCase() === email && u.password === pass);
-    if(match) {
-      localStorage.setItem('cc_active_session', JSON.stringify(match));
-      UI.toast("Identity parameters verified. Welcome back.", "success");
-      this.check();
-    } else {
-      UI.toast("Failed credential challenge. Verification rejected.", "error");
-    }
+    localStorage.setItem('cc_logged_in', 'true');
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').classList.add('active');
+    UI.toast('Workspace initialization complete. Welcome back, Sahil.', 'success');
+    Router.go('dashboard');
   },
-  register() {
-    const name = document.getElementById('regName').value.trim();
-    const email = document.getElementById('regEmail').value.trim().toLowerCase();
-    const pass = document.getElementById('regPassword').value;
-
-    if(!name || !email || pass.length < 6) {
-      UI.toast("Registration specifications violation. Check configuration values.", "error");
-      return;
-    }
-
-    const users = JSON.parse(localStorage.getItem('cc_users') || "[]");
-    if(users.some(u => u.email === email)) {
-      UI.toast("Profile collision. Identity mapping entry already allocated.", "error");
-      return;
-    }
-
-    const profileNode = { name, email, password: pass };
-    users.push(profileNode);
-    localStorage.setItem('cc_users', JSON.stringify(users));
-    localStorage.setItem('cc_active_session', JSON.stringify(profileNode));
-
-    UI.toast("Static profile sequence instantiated successfully.", "success");
-    this.check();
-  },
+  demo() { this.login(); },
   logout() {
-    localStorage.removeItem('cc_active_session');
-    UI.toast("Session security clearance revoked. Logging out.", "info");
-    this.check();
+    localStorage.removeItem('cc_logged_in');
+    document.getElementById('app').classList.remove('active');
+    document.getElementById('loginScreen').style.display = 'flex';
+    UI.toast('Session destroyed successfully.', 'info');
   },
   showRegister() {
     document.getElementById('loginScreen').style.display = 'none';
@@ -480,272 +489,437 @@ const Auth = {
     document.getElementById('registerScreen').style.display = 'none';
     document.getElementById('loginScreen').style.display = 'flex';
   },
-  demo() {
-    document.getElementById('loginEmail').value = "sahil@command.center";
-    document.getElementById('loginPassword').value = "admin123";
+  register() {
+    UI.toast('Account configured successfully. Initializing dashboard.', 'success');
     this.login();
   }
 };
 
-// ==================== WORKSPACE ROUTER ENGINE MODULE ====================
+// ==================== ROUTER SYSTEM ====================
 const Router = {
   currentView: 'dashboard',
-  init() {
-    this.go(this.currentView);
-  },
   go(view) {
     this.currentView = view;
-    document.querySelectorAll('.nav-item').forEach(i => {
-      i.classList.toggle('active', i.getAttribute('data-view') === view);
-    });
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    const activeNav = document.querySelector(`.nav-item[data-view="${view}"]`);
+    if (activeNav) activeNav.classList.add('active');
     
-    const viewTitle = document.getElementById('viewTitle');
-    viewTitle.innerText = view.charAt(0).toUpperCase() + view.slice(1) + " Console Layer";
-    
-    const container = document.getElementById('viewContainer');
-    container.innerHTML = `<div class="fade-in">${this.compile(view)}</div>`;
-    
-    if(view === 'tasks') UI.bindKanbanDrags();
+    document.getElementById('viewTitle').innerText = view.charAt(0).toUpperCase() + view.slice(1);
+    this.renderView(view);
+    if(window.innerWidth <= 768) UI.toggleSidebar(false);
   },
-  compile(view) {
-    switch(view) {
-      case 'dashboard':
-        return `
-          <div class="grid grid-4" style="margin-bottom: 24px;">
-            <div class="stat-card">
-              <div class="stat-header"><span class="stat-label">Tasks Active</span><div class="stat-icon">⚙️</div></div>
-              <div class="stat-value">${State.tasks.filter(t=>t.status!=='done').length}</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-header"><span class="stat-label">Mapped Resources</span><div class="stat-icon">🌐</div></div>
-              <div class="stat-value">${State.bookmarks.length}</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-header"><span class="stat-label">Vault Containers</span><div class="stat-icon">🔒</div></div>
-              <div class="stat-value">${State.vault.length}</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-header"><span class="stat-label">Index Nodes</span><div class="stat-icon">👥</div></div>
-              <div class="stat-value">${State.contacts.length}</div>
-            </div>
+  renderView(view) {
+    const container = document.getElementById('viewContent');
+    container.className = 'content fade-in';
+    
+    if (view === 'dashboard') {
+      const activeTasks = state.tasks.filter(t => t.status !== 'done').length;
+      const bkmkCount = state.bookmarks.length;
+      const vaultCount = state.vault.length;
+      const score = VaultEngine.calculateScore();
+      
+      container.innerHTML = `
+        <div class="grid grid-4" style="margin-bottom:24px">
+          <div class="stat-card" onclick="Router.go('tasks')">
+            <div class="stat-header"><div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg></div><span class="stat-change">Active</span></div>
+            <div class="stat-value">${activeTasks}</div><div class="stat-label">Pending Tasks</div>
+          </div>
+          <div class="stat-card" onclick="Router.go('bookmarks')">
+            <div class="stat-header"><div class="stat-icon" style="color:var(--info);background:rgba(59,130,246,0.1)"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></div><span class="stat-change" style="color:var(--info)">Saved</span></div>
+            <div class="stat-value">${bkmkCount}</div><div class="stat-label">Total Bookmarks</div>
+          </div>
+          <div class="stat-card" onclick="Router.go('vault')">
+            <div class="stat-header"><div class="stat-icon" style="color:var(--warning);background:rgba(245,158,11,0.1)"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/></svg></div><span class="stat-change" style="color:var(--warning)">Score: ${score}%</span></div>
+            <div class="stat-value">${vaultCount}</div><div class="stat-label">Encrypted Keys</div>
+          </div>
+          <div class="stat-card" onclick="Router.go('contacts')">
+            <div class="stat-header"><div class="stat-icon" style="color:var(--success);background:rgba(16,185,129,0.1)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/></svg></div><span class="stat-change" style="color:var(--success)">Synced</span></div>
+            <div class="stat-value">${state.contacts.length}</div><div class="stat-label">Team Members</div>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="section">
+            <div class="section-header"><h3 class="section-title"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/></svg>Critical Task Priority Pipeline</h3><button class="btn btn-secondary btn-sm" onclick="Router.go('tasks')">View All</button></div>
+            <div class="table-container"><table><thead><tr><th>Task Description</th><th>Priority</th><th>Status</th></tr></thead><tbody>${state.tasks.slice(0,4).map(t=>`<tr><td><div class="cell-title">${t.title}</div><div class="cell-meta">Due ${t.due}</div></td><td><span class="badge-pill bg-${t.priority}">${t.priority}</span></td><td><span class="badge-pill bg-${t.status}">${t.status}</span></td></tr>`).join('')}</tbody></table></div>
           </div>
           <div class="section">
-            <div class="section-header"><h3 class="section-title">Critical Systems Engine Checklist</h3></div>
-            <div class="table-container">
-              <table>
-                <thead><tr><th>Task System Node</th><th>Threat Index</th><th>State Vector</th></tr></thead>
-                <tbody>
-                  ${State.tasks.map(t => `
-                    <tr>
-                      <td><div class="cell-title">${t.title}</div><div class="cell-meta">Target Target: ${t.date}</div></td>
-                      <td><span class="badge-pill bg-${t.priority}">${t.priority}</span></td>
-                      <td><span class="badge-pill bg-${t.status}">${t.status}</span></td>
-                    </tr>
-                  `).join('')}
-                </tbody>
-              </table>
-            </div>
-          </div>`;
-      
-      case 'tasks':
-        const colMap = ['todo', 'progress', 'done'];
-        return `
-          <div class="kanban">
-            ${colMap.map(col => {
-              const list = State.tasks.filter(t => t.status === col);
-              return `
-                <div class="kanban-col" data-status="${col}">
-                  <div class="kanban-header"><span>${col.toUpperCase()}</span><span class="kanban-count">${list.length}</span></div>
-                  <div class="kanban-body" ondragover="event.preventDefault();" ondrop="UI.dropTask(event, '${col}')">
-                    ${list.map(t => `
-                      <div class="kanban-card" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '${t.id}')">
-                        <div class="kanban-card-title">${t.title}</div>
-                        <span class="badge-pill bg-${t.priority}">${t.priority}</span>
-                      </div>
-                    `).join('')}
-                  </div>
-                </div>`;
-            }).join('')}
-          </div>`;
-
-      case 'bookmarks':
-        return `
-          <div class="bookmark-list">
-            ${State.bookmarks.map(b => `
-              <div class="bookmark-item" onclick="window.open('${b.url}', '_blank')">
-                <div class="bookmark-fav">${b.icon}</div>
-                <div class="bookmark-info"><div class="bookmark-title">${b.title}</div><div class="bookmark-url">${b.url}</div></div>
-                <div class="bookmark-tags"><span class="tag-pill">${b.category}</span></div>
-              </div>
-            `).join('')}
-          </div>`;
-
-      case 'vault':
-        return `
-          <div class="vault-score">
-            <div class="score-ring">
-              <svg><circle class="bg" cx="42" cy="42" r="36"/><circle class="fill" cx="42" cy="42" r="36"/></svg>
-              <div class="score-value">100%</div>
-            </div>
-            <div class="score-info">
-              <h4 class="score-title">Entropy Seal Integrity Normal</h4>
-              <p class="score-desc">Local symmetric data blocks fully compartmentalized inside browser sandboxes.</p>
-            </div>
+            <div class="section-header"><h3 class="section-title"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>Recent Quick Bookmarks Matrix</h3><button class="btn btn-secondary btn-sm" onclick="Router.go('bookmarks')">Manage</button></div>
+            <div class="bookmark-list" style="padding:12px">${state.bookmarks.slice(0,3).map(b=>`<div class="bookmark-item" onclick="window.open('${b.url}')"><div class="bookmark-fav">${b.fav}</div><div class="bookmark-info"><div class="bookmark-title">${b.title}</div><div class="bookmark-url">${b.url}</div></div></div>`).join('')}</div>
           </div>
-          <div class="vault-grid">
-            ${State.vault.map(v => `
-              <div class="vault-card">
-                <h4 style="margin-bottom:12px;">${v.title}</h4>
-                <div class="vault-field">
-                  <div class="vault-field-label">Target Identifier</div>
-                  <div class="vault-field-value"><span>${v.target}</span></div>
-                </div>
-                <div class="vault-field">
-                  <div class="vault-field-label">Symmetric Secret Access Token Key</div>
-                  <div class="vault-field-value">
-                    <span class="masked" id="secret_${v.id}">${v.secure}</span>
-                    <button onclick="event.stopPropagation(); UI.toggleMask(${v.id}, '${v.secret}')">👁️</button>
-                  </div>
-                </div>
-              </div>
-            `).join('')}
-          </div>`;
-
-      case 'contacts':
-        return `
-          <div class="contact-grid">
-            ${State.contacts.map(c => `
-              <div class="contact-card">
-                <div class="contact-avatar">${c.icon}</div>
-                <div class="contact-name">${c.name}</div>
-                <div class="contact-role">${c.role}</div>
-                <div style="font-size:13px; color:var(--text-secondary); margin-top:8px;">📧 ${c.email}</div>
-                <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">📱 ${c.phone}</div>
-              </div>
-            `).join('')}
-          </div>`;
+        </div>`;
+    } else if (view === 'tasks') {
+      container.innerHTML = `
+        <div class="filter-bar">
+          <input type="text" placeholder="Search operational tasks..." value="${state.filters.tasks.search}" oninput="state.filters.tasks.search=this.value;Router.renderView('tasks')">
+          <select onchange="state.filters.tasks.status=this.value;Router.renderView('tasks')">
+            <option value="all" ${state.filters.tasks.status==='all'?'selected':''}>All Operational States</option>
+            <option value="todo" ${state.filters.tasks.status==='todo'?'selected':''}>To Do / Backlog</option>
+            <option value="progress" ${state.filters.tasks.status==='progress'?'selected':''}>In Progress</option>
+            <option value="done" ${state.filters.tasks.status==='done'?'selected':''}>Completed State</option>
+          </select>
+          <div class="view-toggle" style="margin-left:auto">
+            <button class="${state.taskViewMode==='table'?'active':''}" onclick="state.taskViewMode='table';Router.renderView('tasks')">List Table</button>
+            <button class="${state.taskViewMode==='kanban'?'active':''}" onclick="state.taskViewMode='kanban';Router.renderView('tasks')">Kanban Board</button>
+          </div>
+          <button class="btn btn-sm" onclick="UI.showAddModal('task')">+ Add Task</button>
+        </div>
+        <div id="tasksDisplayData"></div>`;
+      TasksEngine.render();
+    } else if (view === 'bookmarks') {
+      container.innerHTML = `
+        <div class="filter-bar">
+          <input type="text" placeholder="Filter bookmarks matrix..." value="${state.filters.bookmarks.search}" oninput="state.filters.bookmarks.search=this.value;Router.renderView('bookmarks')">
+          <button class="btn btn-sm" style="margin-left:auto" onclick="UI.showAddModal('bookmark')">+ Save URL</button>
+        </div>
+        <div class="bookmark-list" id="bookmarkListData"></div>`;
+      BookmarksEngine.render();
+    } else if (view === 'vault') {
+      const score = VaultEngine.calculateScore();
+      container.innerHTML = `
+        <div class="vault-score">
+          <div class="score-ring"><svg><circle class="bg" cx="40" cy="40" r="36"/><circle class="fill" cx="40" cy="40" r="36" style="stroke-dashoffset:${226 - (226 * score / 100)}"/></svg><div class="score-value">${score}%</div></div>
+          <div class="score-info"><h3 class="score-title">Administrative Cryptographic Health</h3><p class="score-desc">Calculated based on modern criteria: password length, variation of character layers, and classification flags.</p></div>
+          <button class="btn btn-sm" style="margin-left:auto" onclick="UI.showAddModal('vault')">+ Save Credential</button>
+        </div>
+        <div class="filter-bar" style="border-bottom:none"><input type="text" style="width:100%" placeholder="Search cryptographic nodes..." value="${state.filters.vault.search}" oninput="state.filters.vault.search=this.value;Router.renderView('vault')"></div>
+        <div class="vault-grid" id="vaultGridData"></div>`;
+      VaultEngine.render();
+    } else if (view === 'contacts') {
+      container.innerHTML = `
+        <div class="filter-bar">
+          <input type="text" placeholder="Search team directory..." value="${state.filters.contacts.search}" oninput="state.filters.contacts.search=this.value;Router.renderView('contacts')"><button class="btn btn-sm" style="margin-left:auto" onclick="UI.showAddModal('contact')">+ New Contact</button>
+        </div>
+        <div class="contact-grid" id="contactGridData"></div>`;
+      ContactsEngine.render();
     }
   }
 };
 
-// ==================== COGNITIVE USER UI MANAGER MODULE ====================
-const UI = {
-  toast(msg, type='info') {
-    const container = document.getElementById('toastContainer');
-    const el = document.createElement('div');
-    el.className = `toast toast-${type}`;
-    el.innerHTML = `<div>${msg}</div>`;
-    container.appendChild(el);
-    setTimeout(() => el.remove(), 4000);
-  },
-  toggleFab() { document.getElementById('fabMenu').classList.toggle('active'); },
-  toggleMask(id, plain) {
-    const target = document.getElementById(`secret_${id}`);
-    if(target.classList.contains('unmasked')) {
-      target.classList.remove('unmasked');
-      target.innerText = "••••••••••••••••";
+// ==================== TASK BUSINESS LOGIC ENGINE ====================
+const TasksEngine = {
+  render() {
+    const target = document.getElementById('tasksDisplayData');
+    let data = state.tasks.filter(t => {
+      const matchText = t.title.toLowerCase().includes(state.filters.tasks.search.toLowerCase());
+      const matchStatus = state.filters.tasks.status === 'all' || t.status === state.filters.tasks.status;
+      return matchText && matchStatus;
+    });
+
+    if (state.taskViewMode === 'table') {
+      if(!data.length) { target.innerHTML = `<div class="empty"><div class="empty-icon">📂</div><div class="empty-title">No matching tasks found</div></div>`; return; }
+      target.innerHTML = `
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr><th onclick="TasksEngine.sort('title')">Task Directive</th><th onclick="TasksEngine.sort('category')">Classification</th><th onclick="TasksEngine.sort('priority')">Severity</th><th onclick="TasksEngine.sort('status')">Operational State</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+              ${data.map(t=>`
+                <tr>
+                  <td><div class="cell-title">${t.title}</div><div class="cell-meta">Target Target: ${t.due}</div></td>
+                  <td><span class="badge-pill bg-${t.category}">${t.category}</span></td>
+                  <td><span class="badge-pill bg-${t.priority}">${t.priority}</span></td>
+                  <td><span class="badge-pill bg-${t.status}">${t.status}</span></td>
+                  <td><div class="row-actions"><button onclick="TasksEngine.cycleStatus(${t.id})" title="Advance Node State"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></button><button onclick="TasksEngine.delete(${t.id})" title="Purge Record"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></div></td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>`;
     } else {
-      target.classList.add('unmasked');
-      target.innerText = plain;
+      const cols = { todo: 'Backlog Status', progress: 'Development Sync', done: 'Production Complete' };
+      target.innerHTML = `<div class="kanban">${Object.keys(cols).map(c=>`
+        <div class="kanban-col">
+          <div class="kanban-header"><span>${cols[c]}</span><span class="kanban-count">${data.filter(t=>t.status===c).length}</span></div>
+          <div class="kanban-body">
+            ${data.filter(t=>t.status===c).map(t=>`
+              <div class="kanban-card">
+                <div class="kanban-card-title">${t.title}</div>
+                <div class="kanban-card-meta">📅 Due ${t.due}</div>
+                <div class="kanban-card-tags"><span class="badge-pill bg-${t.category}">${t.category}</span><span class="badge-pill bg-${t.priority}">${t.priority}</span></div>
+                <div style="margin-top:10px;display:flex;justify-content:flex-end;gap:6px">
+                  <button class="btn btn-secondary btn-sm" style="padding:4px 8px" onclick="TasksEngine.cycleStatus(${t.id})">⚙️ Cycle</button>
+                  <button class="btn btn-danger btn-sm" style="padding:4px 8px" onclick="TasksEngine.delete(${t.id})">Purge</button>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>`).join('')}</div>`;
     }
   },
-  dropTask(e, targetCol) {
-    const id = parseInt(e.dataTransfer.getData('text/plain'));
-    const t = State.tasks.find(task => task.id === id);
+  cycleStatus(id) {
+    const t = state.tasks.find(x => x.id === id);
     if(t) {
-      t.status = targetCol;
-      saveSystemState();
-      Router.go('tasks');
-      UI.toast(`Updated state of block reference code element #${id}`, "success");
+      if(t.status === 'todo') t.status = 'progress';
+      else if(t.status === 'progress') t.status = 'done';
+      else t.status = 'todo';
+      UI.toast(`Task node ${id} rotated to state: ${t.status}`, 'info');
+      Router.renderView('tasks');
     }
+  },
+  delete(id) {
+    state.tasks = state.tasks.filter(x => x.id !== id);
+    UI.toast(`Purged database task entry allocation ${id}`, 'error');
+    Router.renderView('tasks');
+  },
+  sort(field) {
+    state.tasks.sort((a,b) => a[field].toString().localeCompare(b[field].toString()));
+    this.render();
+  }
+};
+
+// ==================== BOOKMARKS ENGINE ====================
+const BookmarksEngine = {
+  render() {
+    const t = document.getElementById('bookmarkListData');
+    let filtered = state.bookmarks.filter(b => b.title.toLowerCase().includes(state.filters.bookmarks.search.toLowerCase()) || b.url.toLowerCase().includes(state.filters.bookmarks.search.toLowerCase()));
+    if(!filtered.length) { t.innerHTML = `<div class="empty"><div class="empty-icon">🔖</div><div class="empty-title">No index allocations match filters</div></div>`; return; }
+    t.innerHTML = filtered.map(b => `
+      <div class="bookmark-item">
+        <div class="bookmark-fav" onclick="window.open('${b.url}')">${b.fav}</div>
+        <div class="bookmark-info" onclick="window.open('${b.url}')"><div class="bookmark-title">${b.title}</div><div class="bookmark-url">${b.url}</div></div>
+        <div class="bookmark-tags">${b.tags.map(tag=>`<span class="tag-pill">${tag}</span>`).join('')}</div>
+        <div class="bookmark-actions"><button onclick="BookmarksEngine.delete(${b.id})"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button></div>
+      </div>`).join('');
+  },
+  delete(id) {
+    state.bookmarks = state.bookmarks.filter(x => x.id !== id);
+    UI.toast('Bookmark configuration reference deleted.', 'info');
+    Router.renderView('bookmarks');
+  }
+};
+
+// ==================== VAULT ENCRYPTION LOGIC ENGINE ====================
+const VaultEngine = {
+  calculateScore() {
+    if(!state.vault.length) return 100;
+    let total = 0;
+    state.vault.forEach(v => {
+      let score = 40;
+      if(v.pass.length >= 10) score += 20;
+      if(/[A-Z]/.test(v.pass)) score += 20;
+      if(/[^A-Za-z0-9]/.test(v.pass)) score += 20;
+      total += score;
+    });
+    return Math.round(total / state.vault.length);
+  },
+  render() {
+    const t = document.getElementById('vaultGridData');
+    let data = state.vault.filter(v => v.name.toLowerCase().includes(state.filters.vault.search.toLowerCase()) || v.type.toLowerCase().includes(state.filters.vault.search.toLowerCase()));
+    if(!data.length) { t.innerHTML = `<div class="empty"><div class="empty-icon">🔒</div><div class="empty-title">No credentials found matching parameters</div></div>`; return; }
+    t.innerHTML = data.map(v => `
+      <div class="vault-card">
+        <div class="vault-card-header"><div class="vault-card-fav">🛡️</div><div><div class="vault-card-title">${v.name}</div><div class="vault-card-meta">${v.type}</div></div></div>
+        <div class="vault-field"><div class="vault-field-label">Endpoint Connection</div><div class="vault-field-value"><span>${v.url}</span></div></div>
+        <div class="vault-field"><div class="vault-field-label">User Principal</div><div class="vault-field-value"><span>${v.user}</span><button onclick="navigator.clipboard.writeText('${v.user}');UI.toast('Username copied to clipboard','success')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></div>
+        <div class="vault-field"><div class="vault-field-label">Cryptographic Token Layer</div><div class="vault-field-value"><span class="masked" id="vp-${v.id}">${v.pass}</span><div style="display:flex;gap:4px"><button onclick="document.getElementById('vp-${v.id}').classList.toggle('masked')">👁️</button><button onclick="navigator.clipboard.writeText('${v.pass}');UI.toast('Token key mapped to clipboard','success')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></div></div></div>
+        <button class="btn btn-secondary btn-sm" style="width:100%;margin-top:8px" onclick="VaultEngine.delete(${v.id})">Purge Node Allocation</button>
+      </div>`).join('');
+  },
+  delete(id) {
+    state.vault = state.vault.filter(x => x.id !== id);
+    UI.toast('Cryptographic database asset dropped.', 'error');
+    Router.renderView('vault');
+  }
+};
+
+// ==================== CONTACTS ENGINE ====================
+const ContactsEngine = {
+  render() {
+    const t = document.getElementById('contactGridData');
+    let data = state.contacts.filter(c => c.name.toLowerCase().includes(state.filters.contacts.search.toLowerCase()) || c.role.toLowerCase().includes(state.filters.contacts.search.toLowerCase()));
+    if(!data.length) { t.innerHTML = `<div class="empty"><div class="empty-icon">👥</div><div class="empty-title">No synced contacts matched</div></div>`; return; }
+    t.innerHTML = data.map(c => `
+      <div class="contact-card">
+        <div class="contact-avatar">${c.name.charAt(0)}</div>
+        <div class="contact-name">${c.name}</div><div class="contact-role">${c.role}</div>
+        <div class="contact-detail"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>${c.email}</span></div>
+        <div class="contact-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>${c.phone}</span></div>
+        <div class="contact-tags">${c.tags.map(t=>`<span class="tag-pill">${t}</span>`).join('')}</div>
+        <button class="btn btn-secondary btn-sm" style="width:100%;margin-top:14px;border-color:transparent" onclick="ContactsEngine.delete(${c.id})">Drop Node Allocation</button>
+      </div>`).join('');
+  },
+  delete(id) {
+    state.contacts = state.contacts.filter(x => x.id !== id);
+    UI.toast('Contact network profile dropped.', 'info');
+    Router.renderView('contacts');
+  }
+};
+
+// ==================== INTERACTION MODAL INTERFACES ====================
+const UI = {
+  paletteResults: [],
+  toast(msg, type='info') {
+    const c = document.getElementById('toastContainer');
+    const t = document.createElement('div');
+    t.className = `toast toast-${type}`;
+    t.innerHTML = `<div class="toast-message">${msg}</div>`;
+    c.appendChild(t);
+    setTimeout(() => t.remove(), 3500);
+  },
+  toggleSidebar(force) { document.getElementById('sidebar').classList.toggle('open', force); document.getElementById('mobileOverlay').classList.toggle('active', force); },
+  toggleFab() { document.getElementById('fabMenu').classList.toggle('active'); },
+  hideModal() { document.getElementById('modalOverlay').classList.remove('active'); },
+  showAddModal(type) {
+    this.toggleFab();
+    const overlay = document.getElementById('modalOverlay');
+    const m = document.getElementById('modal');
+    overlay.classList.add('active');
+    
+    if (type === 'task') {
+      m.innerHTML = `
+        <div class="modal-header"><h2 class="modal-title">Configure Pipeline Directives</h2><button class="modal-close" onclick="UI.hideModal()">&times;</button></div>
+        <div class="modal-body">
+          <div class="form-group"><label>Task Definition</label><input type="text" id="mtTitle" placeholder="e.g. Audit infrastructure layers"></div>
+          <div class="form-row">
+            <div class="form-group"><label>Priority Rating</label><select id="mtPriority"><option value="low">Low Priority</option><option value="medium" selected>Medium Priority</option><option value="high">High Priority</option><option value="critical">Critical Path</option></select></div>
+            <div class="form-group"><label>Classification</label><select id="mtCategory"><option value="task">Standard Task</option><option value="validation">Security Audit</option><option value="test">Testing Suite</option><option value="meeting">Sync Meeting</option></select></div>
+          </div>
+          <div class="form-group"><label>Target Delivery Matrix</label><input type="date" id="mtDue" value="2026-05-30"></div>
+          <button class="btn" onclick="UI.submitForm('task')">Commit to Pipeline Database</button>
+        </div>`;
+    } else if (type === 'bookmark') {
+      m.innerHTML = `
+        <div class="modal-header"><h2 class="modal-title">Index Resource Reference</h2><button class="modal-close" onclick="UI.hideModal()">&times;</button></div>
+        <div class="modal-body">
+          <div class="form-group"><label>Name Resource</label><input type="text" id="mbTitle" placeholder="e.g. V8 Compilation Core"></div>
+          <div class="form-group"><label>Network Endpoint URL</label><input type="url" id="mbUrl" placeholder="https://..."></div>
+          <div class="form-row">
+            <div class="form-group"><label>Graphic Glyph</label><input type="text" id="mbFav" value="⚡"></div>
+            <div class="form-group"><label>Matrix Layer Tags (comma sep)</label><input type="text" id="mbTags" placeholder="JS, Core, Architecture"></div>
+          </div>
+          <button class="btn" onclick="UI.submitForm('bookmark')">Commit Reference Layout</button>
+        </div>`;
+    } else if (type === 'vault') {
+      m.innerHTML = `
+        <div class="modal-header"><h2 class="modal-title">Protect Node Security Matrix</h2><button class="modal-close" onclick="UI.hideModal()">&times;</button></div>
+        <div class="modal-body">
+          <div class="form-group"><label>Target Node Cluster</label><input type="text" id="mvName" placeholder="Production Infrastructure Core"></div>
+          <div class="form-group"><label>Resource Type Classification</label><input type="text" id="mvType" placeholder="PostgreSQL Cloud Cluster"></div>
+          <div class="form-group"><label>Endpoint Target Connection URI</label><input type="text" id="mvUrl" placeholder="10.0.0.1:5432"></div>
+          <div class="form-row">
+            <div class="form-group"><label>User Principal Identity</label><input type="text" id="mvUser" placeholder="admin_sahil"></div>
+            <div class="form-group"><label>Cryptographic Secret Token Key</label><input type="text" id="mvPass" placeholder="Strong security secret passphrase"></div>
+          </div>
+          <button class="btn" onclick="UI.submitForm('vault')">Lock Encrypted Asset</button>
+        </div>`;
+    } else if (type === 'contact') {
+      m.innerHTML = `
+        <div class="modal-header"><h2 class="modal-title">Register Network Workspace Member</h2><button class="modal-close" onclick="UI.hideModal()">&times;</button></div>
+        <div class="modal-body">
+          <div class="form-group"><label>Identity Full Legal Name</label><input type="text" id="mcName" placeholder="Sahil Kumar"></div>
+          <div class="form-group"><label>Operational Functional Profile Role</label><input type="text" id="mcRole" placeholder="Principal Software Architect"></div>
+          <div class="form-row">
+            <div class="form-group"><label>Workspace Primary Email Address</label><input type="email" id="mcEmail" placeholder="sahil@command.center"></div>
+            <div class="form-group"><label>Secure Telephone Interface Connection</label><input type="text" id="mcPhone" placeholder="+91 XXXXX XXXXX"></div>
+          </div>
+          <div class="form-group"><label>Operational Metadata Labels (comma sep)</label><input type="text" id="mcTags" placeholder="Core, Team, Dev"></div>
+          <button class="btn" onclick="UI.submitForm('contact')">Synchronize Network Node Profile</button>
+        </div>`;
+    }
+  },
+  submitForm(type) {
+    if (type === 'task') {
+      const title = document.getElementById('mtTitle').value;
+      if(!title) return;
+      state.tasks.push({
+        id: Date.now(), title,
+        priority: document.getElementById('mtPriority').value,
+        category: document.getElementById('mtCategory').value,
+        status: 'todo', due: document.getElementById('mtDue').value
+      });
+    } else if (type === 'bookmark') {
+      const title = document.getElementById('mbTitle').value;
+      const url = document.getElementById('mbUrl').value;
+      if(!title || !url) return;
+      state.bookmarks.push({
+        id: Date.now(), title, url,
+        fav: document.getElementById('mbFav').value || '🔗',
+        tags: document.getElementById('mbTags').value.split(',').map(x=>x.trim()).filter(Boolean)
+      });
+    } else if (type === 'vault') {
+      const name = document.getElementById('mvName').value;
+      const pass = document.getElementById('mvPass').value;
+      if(!name || !pass) return;
+      state.vault.push({
+        id: Date.now(), name, pass,
+        type: document.getElementById('mvType').value || 'Secure Node Object',
+        url: document.getElementById('mvUrl').value || 'localhost',
+        user: document.getElementById('mvUser').value || 'root'
+      });
+    } else if (type === 'contact') {
+      const name = document.getElementById('mcName').value;
+      if(!name) return;
+      state.contacts.push({
+        id: Date.now(), name,
+        role: document.getElementById('mcRole').value || 'Workspace Node Peer',
+        email: document.getElementById('mcEmail').value || 'internal@network.sys',
+        phone: document.getElementById('mcPhone').value || 'N/A',
+        tags: document.getElementById('mcTags').value.split(',').map(x=>x.trim()).filter(Boolean)
+      });
+    }
+    this.hideModal();
+    this.toast(`Pipeline allocation synchronization matrix state updated: ${type}`, 'success');
+    Router.renderView(Router.currentView);
   },
   showPalette() {
     document.getElementById('paletteOverlay').classList.add('active');
+    document.getElementById('paletteInput').value = '';
     document.getElementById('paletteInput').focus();
     this.handlePaletteSearch('');
   },
   handlePaletteSearch(q) {
-    const items = [
-      { label: "Routing Link: Operational Console Summary View", route:"dashboard" },
-      { label: "Routing Link: Task Pipeline Board Manager", route:"tasks" },
-      { label: "Routing Link: Directory Dynamic Hyperlinks", route:"bookmarks" },
-      { label: "Routing Link: Cryptographic Key Database Container Vault", route:"vault" },
-      { label: "Routing Link: Contact Vector Mapping Matrix", route:"contacts" }
+    const commands = [
+      { label: 'Navigate Workspace -> Main Dashboard Panel', icon: '📊', action: () => Router.go('dashboard') },
+      { label: 'Navigate Workspace -> Operational Task Pipeline Manager', icon: '📋', action: () => Router.go('tasks') },
+      { label: 'Navigate Workspace -> Saved Matrix Bookmarks Layout', icon: '🔖', action: () => Router.go('bookmarks') },
+      { label: 'Navigate Workspace -> Encrypted Node Key Asset Vault', icon: '🔒', action: () => Router.go('vault') },
+      { label: 'Navigate Workspace -> Synchronized Peer Contact Indexes', icon: '👥', action: () => Router.go('contacts') },
+      { label: 'Trigger System Matrix Pipeline Deployment: Core Tasks', icon: '⚡', action: () => UI.showAddModal('task') },
+      { label: 'Destroy App Lifecycle Session Space (Log Out Engine)', icon: '🛑', action: () => Auth.logout() }
     ];
-    const match = items.filter(i => i.label.toLowerCase().includes(q.toLowerCase()));
-    const results = document.getElementById('paletteResults');
-    results.innerHTML = match.map(m => `
-      <div class="palette-item" style="padding:14px; border-bottom:1px solid var(--border);" onclick="Router.go('${m.route}'); document.getElementById('paletteOverlay').classList.remove('active');">
-        📁 <span>${m.label}</span>
-      </div>
-    `).join('');
-  },
-  openWizard(type) {
-    this.toggleFab();
-    const overlay = document.getElementById('modalOverlay');
-    const title = document.getElementById('modalTitle');
-    const body = document.getElementById('modalBody');
-    
-    title.innerText = `Instantiate New ${type.toUpperCase()} Component System Parameters`;
-    
-    if(type === 'task') {
-      body.innerHTML = `
-        <form onsubmit="event.preventDefault(); UI.commitTask();">
-          <div class="form-group"><label>Task Definition Header</label><input type="text" id="w_title" required></div>
-          <div class="form-group">
-            <label>Priority Threat Threshold Index</label>
-            <select id="w_priority"><option value="todo">Low Complexity</option><option value="medium">Medium System</option><option value="high">High Threat</option><option value="critical">Critical Core Integrity</option></select>
-          </div>
-          <button type="submit" class="btn">Inject Component Instance Matrix</button>
-        </form>`;
-    } else if(type === 'bookmark') {
-      body.innerHTML = `
-        <form onsubmit="event.preventDefault(); UI.commitBookmark();">
-          <div class="form-group"><label>Resource Namespace Title</label><input type="text" id="w_btitle" required></div>
-          <div class="form-group"><label>Hyperlink Absolute URL Path</label><input type="url" id="w_burl" required></div>
-          <div class="form-group"><label>Workspace Folder Category Node Group</label><input type="text" id="w_bcat" value="Resources" required></div>
-          <button type="submit" class="btn">Allocate Dynamic Link Node</button>
-        </form>`;
-    } else {
-      UI.toast("Wizard configuration sub-interface view model mapping missing in base deployment scope.", "info");
-      return;
+    let results = commands;
+    if (q) {
+      results = commands.filter(c => c.label.toLowerCase().includes(q.toLowerCase()));
     }
-    overlay.add('active');
-    overlay.classList.add('active');
+    const container = document.getElementById('paletteResults');
+    if(!results.length) { container.innerHTML = '<div class="palette-empty">No results found matching execution queries</div>'; return; }
+    container.innerHTML = results.map((r, i) => `<div class="palette-item" onclick="UI.runPaletteAction(${i})">${r.icon}<span>${r.label}</span></div>`).join('');
+    UI.paletteResults = results;
   },
-  hideModal() { document.getElementById('modalOverlay').classList.remove('active'); },
-  commitTask() {
-    const title = document.getElementById('w_title').value;
-    const priority = document.getElementById('w_priority').value;
-    State.tasks.push({ id:Date.now(), title, priority, status:'todo', date:new Date().toISOString().split('T')[0] });
-    saveSystemState();
-    this.hideModal();
-    Router.go('tasks');
-    UI.toast("Injected runtime execution task framework node.", "success");
+  runPaletteAction(idx) {
+    const r = UI.paletteResults[idx];
+    if (r) {
+      r.action();
+      document.getElementById('paletteOverlay').classList.remove('active');
+    }
   },
-  commitBookmark() {
-    const title = document.getElementById('w_btitle').value;
-    const url = document.getElementById('w_burl').value;
-    const category = document.getElementById('w_bcat').value;
-    State.bookmarks.push({ id:Date.now(), title, url, category, icon:"⚙️" });
-    saveSystemState();
-    this.hideModal();
-    Router.go('bookmarks');
-    UI.toast("Instantiated new network lookup reference pointer link context.", "success");
+  showNotifications() {
+    UI.toast('All active telemetry channels reporting operational synchronicity state.', 'info');
+  },
+  handleGlobalSearch(q) {
+    if(!q || q.length < 3) return;
+    this.showPalette();
+    document.getElementById('paletteInput').value = q;
+    this.handlePaletteSearch(q);
   }
 };
 
-// Global Boot Sequence Hooks Setup Hooks Wireframing Event System
+// ==================== LIFECYCLE INITIALIZER INTERFACE ====================
 document.addEventListener('DOMContentLoaded', () => {
   Auth.check();
   document.addEventListener('keydown', e => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); UI.showPalette(); }
-    if (e.key === 'Escape') { 
-      UI.hideModal(); 
-      document.getElementById('paletteOverlay').classList.remove('active'); 
-      document.getElementById('fabMenu').classList.remove('active'); 
+    if (e.key === 'Escape') {
+      UI.hideModal();
+      document.getElementById('paletteOverlay').classList.remove('active');
+      document.getElementById('fabMenu').classList.remove('active');
     }
   });
+  window.addEventListener('resize', () => {
+    const btn = document.getElementById('menuBtn');
+    if (btn) btn.style.display = window.innerWidth <= 768 ? 'block' : 'none';
+  });
+  const btn = document.getElementById('menuBtn');
+  if (btn) btn.style.display = window.innerWidth <= 768 ? 'block' : 'none';
 });
 </script>
 </body>
